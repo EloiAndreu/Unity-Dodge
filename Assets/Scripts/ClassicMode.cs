@@ -6,12 +6,13 @@ public class ClassicMode : MonoBehaviour
 {
     public ParametreAugmentarTemps[] parametres;
     public int tirsPerApareixerCaixa = 20;
+    public float startDelay = 3f;
 
     GameObject[] disparadors;
 
     void Start(){
         disparadors = GameManager.Instance.disparadors;
-        StartCoroutine(Disparar());
+        StartCoroutine(StartDelay());
     }
 
     void Update()
@@ -26,6 +27,13 @@ public class ClassicMode : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator StartDelay()
+    {
+        yield return new WaitForSeconds(startDelay); // Esperar 5 segons
+
+        StartCoroutine(Disparar());
     }
 
     IEnumerator Disparar(){
