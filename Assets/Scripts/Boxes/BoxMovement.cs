@@ -42,14 +42,18 @@ public class BoxMovement : ObstacleMov
     IEnumerator DestroyDelay()
     {
         yield return new WaitForSeconds(compteEnrereDestroy);
+        VerdDisparador();
+        Destroy(this.gameObject);
+    }
+
+    void VerdDisparador(){
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, -transform.right, out hit))
+        if (Physics.Raycast(transform.position, -transform.right, out hit, 50f))
         {
             if (hit.collider.CompareTag("Disparador"))
             {
                 hit.transform.GetComponent<Disparador>().SetColorGreen();
             }
         }
-        Destroy(this.gameObject);
     }
 }

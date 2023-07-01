@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Disparador : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class Disparador : MonoBehaviour
     Renderer render;
     public bool disparant = false;
     Coroutine myCoroutine;
+    bool primerCop = false;
+    bool hiHaBox = false;
 
     void Awake(){
         render = GetComponent<Renderer>();
@@ -24,6 +27,25 @@ public class Disparador : MonoBehaviour
         if(GameManager.Instance.GameEnded){
             StopAllCoroutines();
         }
+
+        ComprovarBox();
+    }
+
+    void ComprovarBox(){
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit))
+        {
+            if (hit.collider.CompareTag("Box")){
+                primerCop = true;
+                hiHaBox = true;
+            }
+            else hiHaBox = false;
+
+        }
+        else if(primerCop){
+            primerCop = false;
+            SetColorGreen();
+        }
     }
 
     void Start(){
@@ -32,7 +54,9 @@ public class Disparador : MonoBehaviour
     }
 
     public void Shoot(int velocitat, bool isBox){
-        StartCoroutine(WaitForCoroutineThenShoot(velocitat, isBox));
+        if(!hiHaBox){
+            StartCoroutine(WaitForCoroutineThenShoot(velocitat, isBox));
+        }
     }
 
     IEnumerator WaitForCoroutineThenShoot(int velocitat, bool isBox){
@@ -103,6 +127,7 @@ public class Disparador : MonoBehaviour
     }
 
     public void SetColorGreen(){
+        Debug.Log("Color verd");
         CanviarColor(materials[0]);
     }
 }
