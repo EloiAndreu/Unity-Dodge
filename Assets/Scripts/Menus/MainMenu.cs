@@ -34,6 +34,14 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
+    public void SetTimeScale(float value){
+        Time.timeScale = value;
+    }
+
+    public void Pause(){
+        SetTimeScale(0);
+    }
+
 
     
 }

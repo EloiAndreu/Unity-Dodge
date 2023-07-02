@@ -5,38 +5,48 @@ using TMPro;
 
 public class TextTransitions : MonoBehaviour
 {
-    public TMP_Text roundText;
-    public float fadeSpeed = 1.0f;
-    public float delay = 2.0f;
+    public float fadeDuration = 2f;
 
-    private Coroutine currentCoroutine;
+    private Coroutine currentFadeCoroutine;
 
-    public void ApearAndDisapare(){
-        if (currentCoroutine != null)
+    public void FadeInText(TMP_Text text)
+    {
+        Color startColor = text.color;
+        text.color = new Color(startColor.r, startColor.g, startColor.b, 0f);
+
+        if (currentFadeCoroutine != null)
         {
-            StopCoroutine(currentCoroutine);
+            StopCoroutine(currentFadeCoroutine);
         }
-        currentCoroutine = StartCoroutine(GradualText());
+
+        currentFadeCoroutine = StartCoroutine(FadeTextCoroutine(text, 0f, 1f));
     }
 
-    IEnumerator GradualText(){
-        Color originalColor = roundText.color;
-        roundText.color = new Color(originalColor.r, originalColor.g, originalColor.b, 0.0f);
-
-        while (roundText.color.a < 1.0f)
+    public void FadeOutText(TMP_Text text)
+    {
+        if (currentFadeCoroutine != null)
         {
-            float newAlpha = roundText.color.a + fadeSpeed * Time.deltaTime;
-            roundText.color = new Color(originalColor.r, originalColor.g, originalColor.b, newAlpha);
+            StopCoroutine(currentFadeCoroutine);
+        }
+
+        currentFadeCoroutine = StartCoroutine(FadeTextCoroutine(text, 1f, 0f));
+    }
+
+    IEnumerator FadeTextCoroutine(TMP_Text tmpText, float startAlpha, float targetAlpha)
+    {
+        Color startColor = tmpText.color;
+        Color targetColor = new Color(startColor.r, startColor.g, startColor.b, targetAlpha);
+
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeDuration)
+        {
+            float alpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / fadeDuration);
+            Color newColor = new Color(startColor.r, startColor.g, startColor.b, alpha);
+            tmpText.color = newColor;
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        yield return new WaitForSeconds(delay);
-
-        while (roundText.color.a > 0.0f)
-        {
-            float newAlpha = roundText.color.a - fadeSpeed * Time.deltaTime;
-            roundText.color = new Color(originalColor.r, originalColor.g, originalColor.b, newAlpha);
-            yield return null;
-        }
+        tmpText.color = targetColor;
     }
 }

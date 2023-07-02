@@ -6,7 +6,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-	public TMP_Text roundText, timeText;
+	public TMP_Text finalText, timeText;
 	public TextTransitions tt;
 
 	public GameObject[] disparadors;
@@ -17,8 +17,11 @@ public class GameManager : MonoBehaviour
 
     public bool GameEnded = false;
 
-	public GameObject restartButton;
-	
+	public GameObject optionsMenu;
+	public GameObject map;
+	public GameObject pauseButon;
+
+	public Color colorTextFinal;
 	
 	void Awake()
 	{
@@ -27,8 +30,9 @@ public class GameManager : MonoBehaviour
 	}
 
 	void Start(){
+		Time.timeScale = 1f;
         disparadors = GameObject.FindGameObjectsWithTag("Disparador");
-		restartButton.SetActive(false);
+		optionsMenu.SetActive(false);
 	}
 
 	void Update()
@@ -39,10 +43,18 @@ public class GameManager : MonoBehaviour
 
 	public void GameFinished(){
 		FindObjectOfType<AudioManager>().Play("Explosion");
+		timeText.gameObject.SetActive(false);
+		EnableDisableUI(false);
 		StopAllCoroutines();
 		GameEnded = true;
-		roundText.text = "You Lost :(";
-        tt.ApearAndDisapare();
-		restartButton.SetActive(true);
+		finalText.color = colorTextFinal;
+		finalText.text = tempsTranscorregut.ToString("F2");
+        tt.FadeInText(finalText);
+		optionsMenu.SetActive(true);
+	}
+
+	public void EnableDisableUI(bool enabled){
+		map.SetActive(enabled);
+		pauseButon.SetActive(enabled);
 	}
 }

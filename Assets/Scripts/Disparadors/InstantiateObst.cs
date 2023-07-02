@@ -33,7 +33,7 @@ public class InstantiateObst : MonoBehaviour
         waves++;
         Wave x = SetWaveParametres();
         roundText.text = "ROUND " + waves;
-        tt.ApearAndDisapare();
+        //tt.ApearAndDisapare(roundText);
         yield return new WaitForSeconds(3f);
 
         shottingMode.modeActive = true;
