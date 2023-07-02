@@ -6,11 +6,14 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public int panelToStart;
+    public bool isMainMenu = false;
 
     void Awake(){
-        for(int i=0; i<transform.childCount; i++){
-            if(i != panelToStart) transform.GetChild(i).gameObject.SetActive(false);
-            else transform.GetChild(i).gameObject.SetActive(true);
+        if(isMainMenu){
+            for(int i=0; i<transform.childCount; i++){
+                if(i != panelToStart) transform.GetChild(i).gameObject.SetActive(false);
+                else transform.GetChild(i).gameObject.SetActive(true);
+            }
         }
     }
 
@@ -26,6 +29,11 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Quit");
         Application.Quit();
     }
+
+    public void Restart(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
 
     
 }

@@ -12,6 +12,11 @@ public class ClassicMode : MonoBehaviour
 
     void Start(){
         disparadors = GameManager.Instance.disparadors;
+        StartClassicMode();
+    }
+
+    public void StartClassicMode(){
+        GameManager.Instance.tempsTranscorregut = 0f;
         StartCoroutine(StartDelay());
     }
 

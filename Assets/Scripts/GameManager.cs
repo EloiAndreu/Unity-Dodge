@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     public bool GameEnded = false;
 
+	public GameObject restartButton;
 	
 	
 	void Awake()
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
 
 	void Start(){
         disparadors = GameObject.FindGameObjectsWithTag("Disparador");
+		restartButton.SetActive(false);
 	}
 
 	void Update()
@@ -40,5 +42,6 @@ public class GameManager : MonoBehaviour
 		GameEnded = true;
 		roundText.text = "You Lost :(";
         tt.ApearAndDisapare();
+		restartButton.SetActive(true);
 	}
 }
