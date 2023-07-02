@@ -77,6 +77,8 @@ public class Disparador : MonoBehaviour
                 
             }
 
+            FindObjectOfType<AudioManager>().Play("Shoot");
+            
             GameObject obstacle;
             if(isBox) obstacle = Instantiate(boxPrefab, transform.position, Quaternion.identity, obstaclesParent.transform);
             else obstacle = Instantiate(obstaclePrefab, transform.position, Quaternion.identity, obstaclesParent.transform);

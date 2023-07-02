@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     }
 
 	public void GameFinished(){
+		FindObjectOfType<AudioManager>().Play("Explosion");
 		StopAllCoroutines();
 		GameEnded = true;
 		roundText.text = "You Lost :(";

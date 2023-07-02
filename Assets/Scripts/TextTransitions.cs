@@ -7,7 +7,7 @@ public class TextTransitions : MonoBehaviour
 {
     public TMP_Text roundText;
     public float fadeSpeed = 1.0f;
-    public float delay = 1.0f;
+    public float delay = 2.0f;
 
     private Coroutine currentCoroutine;
 
