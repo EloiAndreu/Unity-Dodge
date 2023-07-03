@@ -5,7 +5,9 @@ using UnityEngine;
 public class ClassicMode : MonoBehaviour
 {
     public ParametreAugmentarTemps[] parametres;
-    public int tirsPerApareixerCaixa = 20;
+    public float tempsPerApareixerCaixa1 = 10f;
+    public float tempsPerApareixerCaixa2 = 20f;
+    bool apareixCaixa = false;
     public float startDelay = 3f;
 
     public List<GameObject> dispDetectats;
@@ -15,11 +17,19 @@ public class ClassicMode : MonoBehaviour
     void Start(){
         disparadors = GameManager.Instance.disparadors;
         StartClassicMode();
+        StartCoroutine(SpawnBoxes());
     }
 
     public void StartClassicMode(){
         GameManager.Instance.tempsTranscorregut = 0f;
         StartCoroutine(StartDelay());
+    }
+
+    IEnumerator SpawnBoxes(){
+        float tempsPerApareixerCaixa = Random.Range(tempsPerApareixerCaixa1, tempsPerApareixerCaixa2);
+        yield return new WaitForSeconds(tempsPerApareixerCaixa);
+        apareixCaixa = true;
+        StartCoroutine(SpawnBoxes());
     }
 
     void Update()
@@ -45,8 +55,12 @@ public class ClassicMode : MonoBehaviour
 
     IEnumerator Disparar(){
         bool isBox = false;
-        int apareixCaixaValue = Random.Range(0, tirsPerApareixerCaixa);
-        if(apareixCaixaValue==0) isBox = true;
+        if(apareixCaixa){
+            isBox = true;
+            apareixCaixa = false;
+        }
+        //int apareixCaixaValue = Random.Range(0, tirsPerApareixerCaixa);
+        //if(apareixCaixaValue==0) isBox = true;
 
 
         /*
