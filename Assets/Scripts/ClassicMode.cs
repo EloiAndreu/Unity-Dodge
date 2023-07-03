@@ -8,6 +8,8 @@ public class ClassicMode : MonoBehaviour
     public int tirsPerApareixerCaixa = 20;
     public float startDelay = 3f;
 
+    public List<GameObject> dispDetectats;
+
     GameObject[] disparadors;
 
     void Start(){
@@ -46,6 +48,66 @@ public class ClassicMode : MonoBehaviour
         int apareixCaixaValue = Random.Range(0, tirsPerApareixerCaixa);
         if(apareixCaixaValue==0) isBox = true;
 
+
+        /*
+
+        //Multiple Tirs
+        int randomObjectesAlhora = Random.Range(0, parametres[2]);
+        List<int> posAlhora = new List<int>();
+
+        for(int i=0; i<randomObjectesAlhora; i++){
+            int randomValor = Random.Range(0, disparadors.Length);
+            while(posAlhora.Contains(randomValor)){
+                randomValor = Random.Range(0, disparadors.Length);
+            }
+            posAlhora.Add(randomValor);          
+        }
+
+        for(int i=posAlhora.Count-1; i>=0; i--){ 
+            disparadors[posAlhora[i]].GetComponent<Disparador>().Shoot(x.velocitatObstacles, false);
+            posAlhora.Remove(posAlhora[i]);
+        }
+
+        */
+
+        float radi = parametres[3].valorFinal-parametres[3].valorActual;
+        Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+        Vector3 detectionPos = new Vector3(-4.5f, player.position.y, player.position.z);
+        dispDetectats = DetectarObjectesAlVoltant(detectionPos, radi);
+
+
+        int randomObjectesAlhora = (int)Random.Range(1, parametres[2].valorActual);
+        //Debug.Log(randomObjectesAlhora);
+        List<int> posAlhora = new List<int>();
+
+        for(int i=0; i<randomObjectesAlhora; i++){
+
+            int randomValor = Random.Range(0, dispDetectats.Count);
+            while(posAlhora.Contains(randomValor)){
+                randomValor = Random.Range(0, dispDetectats.Count);
+            }
+            posAlhora.Add(randomValor);          
+        }
+
+        for(int i=posAlhora.Count-1; i>=0; i--){
+            float randomValue = Random.value;
+            if(randomValue <= parametres[0].valorActual/100f && dispDetectats.Count > 5){
+                Debug.Log("Disparar Detectant Jugador");
+                for(int j=0; j<disparadors.Length; j++){
+                    disparadors[j].GetComponent<Disparador>().ShootDetectingPlayer(1, isBox);
+                }
+            }
+            else{
+                dispDetectats[posAlhora[i]].GetComponent<Disparador>().Shoot(1, isBox);
+                posAlhora.Remove(posAlhora[i]);
+            }
+        }
+        
+
+        //int randomDisp = Random.Range(0, dispDetectats.Count);
+        //dispDetectats[randomDisp].GetComponent<Disparador>().Shoot(1, isBox);
+
+        /*
         float randomValue = Random.value;
         if(randomValue <= parametres[0].valorActual/100f){
             for(int i=0; i<disparadors.Length; i++){
@@ -57,8 +119,28 @@ public class ClassicMode : MonoBehaviour
             disparadors[randomDisparador].GetComponent<Disparador>().Shoot(1, isBox);
         }
 
-        yield return new WaitForSeconds(1-parametres[1].valorActual);
+        */
+        yield return new WaitForSeconds(parametres[1].valorFinal-parametres[1].valorActual);
         if(!GameManager.Instance.GameEnded)StartCoroutine(Disparar());
+    }
+
+    //Detectem tots els disparadors donada una posició i un radi
+    List<GameObject> DetectarObjectesAlVoltant(Vector3 posicio, float radi)
+    {
+        //Debug.Log("prova");
+        Collider[] objectes = Physics.OverlapSphere(posicio, radi);
+        List<GameObject> objectesDetectats = new List<GameObject>();
+
+        foreach (Collider collider in objectes)
+        {
+            if (collider.CompareTag("Disparador"))
+            {
+                GameObject objecteDetectat = collider.gameObject;
+                objectesDetectats.Add(objecteDetectat);
+            }
+        }
+
+        return objectesDetectats;
     }
 
     [System.Serializable]

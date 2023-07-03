@@ -20,6 +20,8 @@ public class GameManager : MonoBehaviour
 	public GameObject optionsMenu;
 	public GameObject map;
 	public GameObject pauseButon;
+	[HideInInspector]
+	public GameObject player;
 
 	public Color colorTextFinal;
 	
@@ -27,6 +29,7 @@ public class GameManager : MonoBehaviour
 	{
 		Instance = this;
 		dispManager.InstantiateDisparadors(xDisparadors, yDisparadors);
+		player = GameObject.FindGameObjectWithTag("Player");
 	}
 
 	void Start(){

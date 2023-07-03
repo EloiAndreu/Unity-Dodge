@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3867575900801846106}
   - component: {fileID: 7904772591197844787}
   - component: {fileID: 1041457243866634327}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,8 @@ GameObject:
   - component: {fileID: 8793709097485396891}
   - component: {fileID: 6768189633272225617}
   - component: {fileID: 8902817099350847858}
-  m_Layer: 0
+  - component: {fileID: 2339305223132589929}
+  m_Layer: 7
   m_Name: Disparador
   m_TagString: Disparador
   m_Icon: {fileID: 0}
@@ -225,3 +226,16 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 4e9cebf28a49c1247af317bfa07a3ff8, type: 2}
   - {fileID: 2100000, guid: fa86790971880f140b3972a721b3eca3, type: 2}
   disparant: 0
+--- !u!65 &2339305223132589929
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5110896099942710916}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 0.99999994, z: 1.0000002}
+  m_Center: {x: 0.00000002980233, y: -0.000000029802322, z: 0}

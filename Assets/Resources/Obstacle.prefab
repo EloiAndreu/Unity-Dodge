@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4788714809930251739}
   - component: {fileID: 5172157125842773545}
   - component: {fileID: 4745851049312209324}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 1740007893793551386}
   - component: {fileID: 8503757358883403795}
   - component: {fileID: 6186752767858066421}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

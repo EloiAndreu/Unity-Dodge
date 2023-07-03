@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7977219650568620632}
   - component: {fileID: 430187133828083620}
   - component: {fileID: 5744604063849726404}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Box
   m_TagString: Box
   m_Icon: {fileID: 0}
@@ -128,8 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c555697c54d3248860b38485bbfe9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  finalScale: {x: 1, y: 1, z: 1}
-  initialPos: {x: 0, y: 0, z: 0}
+  compteEnrereDestroy: 20
 --- !u!1 &8657730700690915063
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +140,7 @@ GameObject:
   - component: {fileID: 1858364239541623283}
   - component: {fileID: 4811699337109537508}
   - component: {fileID: 8215956098641709688}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

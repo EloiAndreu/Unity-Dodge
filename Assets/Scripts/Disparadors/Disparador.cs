@@ -128,7 +128,7 @@ public class Disparador : MonoBehaviour
     }
 
     public void SetColorGreen(){
-        Debug.Log("Color verd");
+        //Debug.Log("Color verd");
         CanviarColor(materials[0]);
     }
 }
