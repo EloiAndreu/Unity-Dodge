@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerMov : MonoBehaviour
 {
-    public Rigidbody rb;
-
     Vector3 direccio;
     Vector3 newPosition;
     bool esMou = false;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.2850263, g: 0.37139297, b: 0.49601135, a: 1}
+  m_IndirectSpecularColor: {r: 0.28502616, g: 0.37139267, b: 0.49601075, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3289,6 +3289,7 @@ GameObject:
   - component: {fileID: 1510342938}
   - component: {fileID: 1510342943}
   - component: {fileID: 1510342942}
+  - component: {fileID: 1510342945}
   - component: {fileID: 1510342944}
   m_Layer: 6
   m_Name: Player
@@ -3382,12 +3383,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1510342937}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ffb909dd36d29147b7a90d4f1e933bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 1510342943}
   distancePoint: 0
 --- !u!54 &1510342943
 Rigidbody:
@@ -3501,6 +3501,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1510342945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1510342937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f18272a116c04b4eae87b4c9bfde8e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSwipeDistance: 20
 --- !u!1 &1608508415
 GameObject:
   m_ObjectHideFlags: 0
