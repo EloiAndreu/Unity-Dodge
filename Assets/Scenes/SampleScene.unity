@@ -3533,7 +3533,7 @@ MonoBehaviour:
   sounds:
   - name: Shoot
     clip: {fileID: 8300000, guid: 5669e560d8e2ae34ca576ba0f04904d5, type: 3}
-    volume: 0.5
+    volume: 0.3
     pitch: 2
     time: 0
     source: {fileID: 0}
