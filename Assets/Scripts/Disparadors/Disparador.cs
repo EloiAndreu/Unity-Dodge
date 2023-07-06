@@ -23,9 +23,9 @@ public class Disparador : MonoBehaviour
     }
 
     void Update(){
-        if(GameManager.Instance.GameEnded){
-            StopAllCoroutines();
-        }
+        //if(GameManager.Instance.GameEnded){
+            //StopAllCoroutines();
+        //}
 
         ComprovarBox();
     }

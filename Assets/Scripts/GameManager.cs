@@ -6,7 +6,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-	public TMP_Text finalText, timeText;
+	public TMP_Text finalText, timeText, anuncisRestants;
 	public TextTransitions tt;
 
 	public GameObject[] disparadors;
@@ -20,14 +20,17 @@ public class GameManager : MonoBehaviour
 	public GameObject optionsMenu;
 	public GameObject map;
 	public GameObject pauseButon;
+	public GameObject recompensaButon;
 	[HideInInspector]
 	public GameObject player;
 	public GameObject playerPrefab;
 	public Vector3 newPlayerposition;
     public Quaternion newPlayerrotation;
-	public bool wasRewarded = false;
+	public int anuncisRest = 3;
 
 	public Color colorTextFinal;
+
+	public RewardedAdsButton rewardedAds;
 	
 	void Awake()
 	{
@@ -51,13 +54,18 @@ public class GameManager : MonoBehaviour
 	public void GameFinished(){
 		FindObjectOfType<AudioManager>().Play("Explosion");
 		Time.timeScale = 0f;
+		if(anuncisRest<=0) {
+			recompensaButon.SetActive(false);
+		}
 		EnableDisableUI(false);
 		//StopAllCoroutines();
 		GameEnded = true;
 		finalText.color = colorTextFinal;
 		finalText.text = tempsTranscorregut.ToString("F2");
-        tt.FadeInText(finalText);
+		anuncisRestants.text = "Anuncis restants: " + anuncisRest.ToString();
+        //tt.FadeInText(finalText);
 		optionsMenu.SetActive(true);
+		rewardedAds.LoadAd();
 	}
 
 	public void EnableDisableUI(bool enabled){
@@ -67,13 +75,11 @@ public class GameManager : MonoBehaviour
 	}
 
 	public void Reward(){
-		wasRewarded=true;
+		if(anuncisRest>0) anuncisRest--;
 		GameEnded = false;
 		EnableDisableUI(true);
 		optionsMenu.SetActive(false);
 		Instantiate(playerPrefab, newPlayerposition, newPlayerrotation);
 		Time.timeScale = 1f;
-
-
 	}
 }
