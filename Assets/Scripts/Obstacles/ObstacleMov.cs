@@ -15,6 +15,10 @@ public class ObstacleMov : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.Instance.GameEnded){
+            Destroy(this.gameObject);
+        }
+
         if(transform.position.x > 20){
             Destroy(this.gameObject);
         }
