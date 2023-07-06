@@ -12,6 +12,8 @@ public class PlayerCollision : MonoBehaviour
             ParticleSystem particleSystem = particlesGO.GetComponent<ParticleSystem>();
             particleSystem.Play();
 
+            GameManager.Instance.newPlayerposition = other.gameObject.transform.position;
+            GameManager.Instance.newPlayerrotation = other.gameObject.transform.rotation;
             Destroy(other.gameObject);
             GameManager.Instance.GameFinished();
         }

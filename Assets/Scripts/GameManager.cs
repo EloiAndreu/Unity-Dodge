@@ -22,6 +22,10 @@ public class GameManager : MonoBehaviour
 	public GameObject pauseButon;
 	[HideInInspector]
 	public GameObject player;
+	public GameObject playerPrefab;
+	public Vector3 newPlayerposition;
+    public Quaternion newPlayerrotation;
+	public bool wasRewarded = false;
 
 	public Color colorTextFinal;
 	
@@ -46,9 +50,9 @@ public class GameManager : MonoBehaviour
 
 	public void GameFinished(){
 		FindObjectOfType<AudioManager>().Play("Explosion");
-		timeText.gameObject.SetActive(false);
+		Time.timeScale = 0f;
 		EnableDisableUI(false);
-		StopAllCoroutines();
+		//StopAllCoroutines();
 		GameEnded = true;
 		finalText.color = colorTextFinal;
 		finalText.text = tempsTranscorregut.ToString("F2");
@@ -59,5 +63,17 @@ public class GameManager : MonoBehaviour
 	public void EnableDisableUI(bool enabled){
 		map.SetActive(enabled);
 		pauseButon.SetActive(enabled);
+		timeText.gameObject.SetActive(enabled);
+	}
+
+	public void Reward(){
+		wasRewarded=true;
+		GameEnded = false;
+		EnableDisableUI(true);
+		optionsMenu.SetActive(false);
+		Instantiate(playerPrefab, newPlayerposition, newPlayerrotation);
+		Time.timeScale = 1f;
+
+
 	}
 }
