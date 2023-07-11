@@ -9,6 +9,7 @@ public class ClassicMode : MonoBehaviour
     public float tempsPerApareixerCaixa2 = 20f;
     bool apareixCaixa = false;
     public float startDelay = 3f;
+    public float avançemFinsElSegon;
 
     public List<GameObject> dispDetectats;
 
@@ -36,11 +37,13 @@ public class ClassicMode : MonoBehaviour
     {
         for(int i=0; i<parametres.Length; i++){
             if(parametres[i].esPotAgumentar){
-                float tempsTranscorregut = GameManager.Instance.tempsTranscorregut;
-                parametres[i].valorActual = parametres[i].ObtenirAugment(tempsTranscorregut);
+                float tempsTranscorregut = GameManager.Instance.tempsTranscorregut + avançemFinsElSegon;
+                if(tempsTranscorregut >= parametres[i].segPerComençar){
+                    parametres[i].valorActual = parametres[i].ObtenirAugment(tempsTranscorregut);
 
-                if(parametres[i].valorActual >= parametres[i].valorFinal){
-                    parametres[i].esPotAgumentar = false;
+                    if(parametres[i].valorActual >= parametres[i].valorFinal){
+                        parametres[i].esPotAgumentar = false;
+                    }
                 }
             }
         }
@@ -91,6 +94,7 @@ public class ClassicMode : MonoBehaviour
 
 
         int randomObjectesAlhora = (int)Random.Range(1, parametres[2].valorActual);
+        if(randomObjectesAlhora > dispDetectats.Count) randomObjectesAlhora = dispDetectats.Count;
         //Debug.Log(randomObjectesAlhora);
         List<int> posAlhora = new List<int>();
 
@@ -99,6 +103,7 @@ public class ClassicMode : MonoBehaviour
             int randomValor = Random.Range(0, dispDetectats.Count);
             while(posAlhora.Contains(randomValor)){
                 randomValor = Random.Range(0, dispDetectats.Count);
+                Debug.Log("S'encalla aqui?");
             }
             posAlhora.Add(randomValor);          
         }
@@ -163,22 +168,24 @@ public class ClassicMode : MonoBehaviour
         public float valorInicial;
         public float valorFinal;
         public float tempsTotal;
-        public float tempsInicial;
+        public float tempsAvançat;
+        public float segPerComençar;
         public bool esPotAgumentar = true;
         public float valorActual;
 
-        public ParametreAugmentarTemps(string _name, float _valInici, float _valFin, float _tTotal, float _tInici, bool _esPotAugm, float _valAct){
+        public ParametreAugmentarTemps(string _name, float _valInici, float _valFin, float _tTotal, float _tInici, float _segCom, bool _esPotAugm, float _valAct){
             this.name = _name;
             this.valorInicial = _valInici;
             this.valorFinal = _valFin;
             this.tempsTotal = _tTotal;
-            this.tempsInicial = _tInici;
+            this.tempsAvançat = _tInici;
+            this.segPerComençar = _segCom;
             this.esPotAgumentar = _esPotAugm;
             this.valorActual = _valAct;
         }
 
         public float ObtenirAugment(float temps){
-            return Mathf.Lerp(valorInicial, valorFinal, (temps-tempsInicial)/tempsTotal);
+            return Mathf.Lerp(valorInicial, valorFinal, (temps-tempsAvançat)/tempsTotal);
         }
     }
 }

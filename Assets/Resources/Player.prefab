@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5018253648387692857}
   - component: {fileID: 5018253648387692856}
   - component: {fileID: 5018253648387692807}
+  - component: {fileID: 3616244504214098970}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -123,7 +124,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5018253648387692863}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ffb909dd36d29147b7a90d4f1e933bc, type: 3}
   m_Name: 
@@ -136,9 +137,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5018253648387692863}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f18272a116c04b4eae87b4c9bfde8e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   minSwipeDistance: 20
+--- !u!114 &3616244504214098970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5018253648387692863}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f98f981c81f1064b818d63e4813692c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minSwipeDistance: 5

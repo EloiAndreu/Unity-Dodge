@@ -2,40 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AndPlayerMov : MonoBehaviour
+public class AndPlayerMov2 : MonoBehaviour
 {
     Vector2 fingerDownPosition;
-    Vector2 fingerUpPosition;
-    bool potMoure;
+    Vector2 fingerDirPosition;
+    bool potMoure = true;
 
     public float minSwipeDistance = 20f;
 
-    void Update()
-    {
-        // Detectar l'inici del moviment
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            potMoure = true;
+    void Update(){
+        if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began){
             fingerDownPosition = Input.GetTouch(0).position;
-            fingerUpPosition = Input.GetTouch(0).position;
+            fingerDirPosition = Input.GetTouch(0).position;
         }
 
-        float swipeDistanceX = fingerUpPosition.x - fingerDownPosition.x;
-        float swipeDistanceY = fingerUpPosition.y - fingerDownPosition.y;
-        
-        // Detectar el final del moviment
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
-        {
-            fingerUpPosition = Input.GetTouch(0).position;
+        if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved){
+            fingerDirPosition = Input.GetTouch(0).position;
             if(potMoure) DetectSwipe();
         }
+
+        if(Input.touchCount == 0){
+            potMoure = true;
+        }
+
+
     }
 
     void DetectSwipe()
     {
+        potMoure = false;
         // Calcular la distancia del moviment en les dues direccions
-        float swipeDistanceX = fingerUpPosition.x - fingerDownPosition.x;
-        float swipeDistanceY = fingerUpPosition.y - fingerDownPosition.y;
+        float swipeDistanceX = fingerDirPosition.x - fingerDownPosition.x;
+        float swipeDistanceY = fingerDirPosition.y - fingerDownPosition.y;
 
         // Comprobar si la distancia del moviment es gran
         if (Mathf.Abs(swipeDistanceX) > minSwipeDistance || Mathf.Abs(swipeDistanceY) > minSwipeDistance)
@@ -65,7 +63,6 @@ public class AndPlayerMov : MonoBehaviour
                     Move(Vector3.down);
                 }
             }
-            potMoure = false;
         }
     }
 
@@ -79,5 +76,5 @@ public class AndPlayerMov : MonoBehaviour
         else{
             transform.position += dir;
         }
-    }    
+    }  
 }
