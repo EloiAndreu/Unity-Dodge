@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
 	public TMP_Text tempsErrereText;
 	public GameObject buttonsObj;
 	public Image panelFinal;
+
+	GameData data;
 	
 	void Awake()
 	{
@@ -122,5 +124,13 @@ public class GameManager : MonoBehaviour
 		buttonsObj.SetActive(false);
 		comptadorEnrrereON = true;
 		if(anuncisRest>0) anuncisRest--;
+	}
+
+	public void SaveGame(bool tut, float time){
+		SaveSystem.SaveGame(tut, time);
+	}
+
+	public void LoadGame(){
+		data = SaveSystem.LoadGame();
 	}
 }
