@@ -4,6 +4,18 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem
 {
+    public static GameData CreateFile(){
+        string path = Application.persistentDataPath + "/game.fun";
+        if(File.Exists(path)){
+            Debug.Log("Fitxer de dades ja està creat" + path);
+            return null;
+        }
+        else{
+            SaveGame(true, 0f);
+            return new GameData(true, 0f);
+        }
+    }
+
     public static void SaveGame(bool hasMadetutorial, float maxScore){
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/game.fun";
@@ -27,8 +39,8 @@ public static class SaveSystem
             return data;
         }
         else{
-            Debug.LogError("Save file not found in" + path);
-            return null;
+            GameData data = CreateFile();
+            return data;
         }
     }
 }

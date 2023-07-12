@@ -39,10 +39,12 @@ public class GameManager : MonoBehaviour
 	public Image panelFinal;
 
 	GameData data;
+	public TMP_Text maxScore;
 	
 	void Awake()
 	{
 		Instance = this;
+		LoadGame();
 		dispManager.InstantiateDisparadors(xDisparadors, yDisparadors);
 		player = GameObject.FindGameObjectWithTag("Player");
 	}
@@ -103,10 +105,19 @@ public class GameManager : MonoBehaviour
 		buttonsObj.SetActive(true);
 		//StopAllCoroutines();
 		GameEnded = true;
+
+		float score = tempsTranscorregut;
+		if(data.maxScore < score){
+			SaveGame(true, score);
+			maxScore.text = "Max: " + score.ToString("F2");
+		}
+		else maxScore.text = "Max: " + data.maxScore.ToString("F2");
+
 		tempsErrereText.color = colorTextVermell;
 		tempsErrereText.text = "Has Perdut :<";
 		finalText.color = colorTextVermell;
-		finalText.text = tempsTranscorregut.ToString("F2");
+		finalText.text = score.ToString("F2");
+
 		anuncisRestants.text = "Anuncis restants: " + anuncisRest.ToString();
         //tt.FadeInText(finalText);
 		optionsMenu.SetActive(true);
