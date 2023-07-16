@@ -5,27 +5,60 @@ using UnityEngine.UI;
 
 public class ModeMenu : MonoBehaviour
 {
-    int mode = 1;
-    public Image imgD, imgE, imgC;
+    public int imgID = 1;
+    public GameObject[] imatges;
     public Sprite[] sprites;
     public Animator anim1, anim2;
 
     void Start(){
-        MovDreta();
+        MostrarImgCostats(false);
+        //MovDreta();
     }
 
     void Update(){
-        if (!anim1.IsInTransition(0) && !anim1.GetCurrentAnimatorStateInfo(0).IsName("RedueixUI")){
-            anim1.SetInteger("AnimDespl", 0);
+        if(anim1.gameObject.activeSelf && !anim1.GetCurrentAnimatorStateInfo(0).IsName("RedueixUI")){
+            if (!anim1.GetCurrentAnimatorStateInfo(0).IsName("DesapareixerEUI") && !anim1.GetCurrentAnimatorStateInfo(0).IsName("DesapareixerDUI")){
+                anim1.SetInteger("AnimDespl", 0);
+            }
         }
     }
 
     public void MovDreta(){
-        mode--;
-        imgC.sprite = sprites[mode];
-        imgE.sprite = sprites[mode];
-        anim1.SetInteger("AnimDespl", 1); //Apareixer Esqu
-        anim2.SetInteger("AnimDespl", 4); //Desapareixer Dreta
-        
+        if(imgID >= 0){
+            imgID--;
+            if(imgID < 0) imgID = 0;
+
+            AssignarImatges();
+            MostrarImgCostats(true);
+
+            anim1.SetInteger("AnimDespl", 1); //Apareixer Esqu
+            anim2.SetInteger("AnimDespl", 4); //Desapareixer Dreta
+        }        
+    }
+
+    public void MovEsquerra(){
+        if(imgID < sprites.Length){
+            imgID++;
+            if(imgID >= sprites.Length) imgID = sprites.Length;
+
+            AssignarImatges();
+            MostrarImgCostats(true);
+
+            anim1.SetInteger("AnimDespl", 2); //Apareixer Esqu
+            anim2.SetInteger("AnimDespl", 3); //Desapareixer Dreta
+        }        
+    }
+
+
+    void MostrarImgCostats(bool mode){
+        imatges[0].SetActive(mode);
+        imatges[1].SetActive(!mode);
+        imatges[2].SetActive(mode);
+    }
+
+    void AssignarImatges(){
+        if((imgID-1)>=0 && (imgID-1)<sprites.Length) imatges[0].GetComponent<Image>().sprite = sprites[imgID-1];
+        if(imgID>=0 && imgID<sprites.Length) imatges[1].GetComponent<Image>().sprite = sprites[imgID];
+        if((imgID+1)>=0 && (imgID+1)<sprites.Length) imatges[2].GetComponent<Image>().sprite = sprites[imgID+1];
     }
 }
