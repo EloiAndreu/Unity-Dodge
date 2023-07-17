@@ -17,8 +17,9 @@ public class ModeMenu : MonoBehaviour
 
     void Update(){
         if(anim1.gameObject.activeSelf && !anim1.GetCurrentAnimatorStateInfo(0).IsName("RedueixUI")){
-            if (!anim1.GetCurrentAnimatorStateInfo(0).IsName("DesapareixerEUI") && !anim1.GetCurrentAnimatorStateInfo(0).IsName("DesapareixerDUI")){
+            if (!(anim1.GetCurrentAnimatorStateInfo(0).IsName("DesapareixerEUI") || anim1.GetCurrentAnimatorStateInfo(0).IsName("DesapareixerDUI"))){
                 anim1.SetInteger("AnimDespl", 0);
+                MostrarImgCostats(false);
             }
         }
     }
@@ -28,7 +29,7 @@ public class ModeMenu : MonoBehaviour
             imgID--;
             if(imgID < 0) imgID = 0;
 
-            AssignarImatges();
+            AssignarImatgesD();
             MostrarImgCostats(true);
 
             anim1.SetInteger("AnimDespl", 1); //Apareixer Esqu
@@ -39,13 +40,13 @@ public class ModeMenu : MonoBehaviour
     public void MovEsquerra(){
         if(imgID < sprites.Length){
             imgID++;
-            if(imgID >= sprites.Length) imgID = sprites.Length;
+            if(imgID >= sprites.Length-1) imgID = sprites.Length-1;
 
-            AssignarImatges();
+            AssignarImatgesE();
             MostrarImgCostats(true);
 
             anim1.SetInteger("AnimDespl", 2); //Apareixer Esqu
-            anim2.SetInteger("AnimDespl", 3); //Desapareixer Dreta
+            anim2.SetInteger("AnimDespl", 4); //Desapareixer Dreta
         }        
     }
 
@@ -56,9 +57,19 @@ public class ModeMenu : MonoBehaviour
         imatges[2].SetActive(mode);
     }
 
-    void AssignarImatges(){
-        if((imgID-1)>=0 && (imgID-1)<sprites.Length) imatges[0].GetComponent<Image>().sprite = sprites[imgID-1];
+    void AssignarImatgesD(){
+        /*
+        if((imgID-2)>=0 && (imgID-2)<sprites.Length) imatges[0].GetComponent<Image>().sprite = sprites[imgID-2];
         if(imgID>=0 && imgID<sprites.Length) imatges[1].GetComponent<Image>().sprite = sprites[imgID];
-        if((imgID+1)>=0 && (imgID+1)<sprites.Length) imatges[2].GetComponent<Image>().sprite = sprites[imgID+1];
+        if((imgID-1)>=0 && (imgID-1)<sprites.Length) imatges[2].GetComponent<Image>().sprite = sprites[imgID-1];
+        */
+    }
+
+    void AssignarImatgesE(){
+        /*
+        if((imgID+1)>=0 && (imgID+1)<sprites.Length) imatges[0].GetComponent<Image>().sprite = sprites[imgID+1];
+        if(imgID>=0 && imgID<sprites.Length) imatges[1].GetComponent<Image>().sprite = sprites[imgID];
+        if((imgID+2)>=0 && (imgID+2)<sprites.Length) imatges[2].GetComponent<Image>().sprite = sprites[imgID+2];
+        */
     }
 }
