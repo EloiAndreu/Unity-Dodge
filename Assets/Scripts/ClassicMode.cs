@@ -38,13 +38,13 @@ public class ClassicMode : MonoBehaviour
         for(int i=0; i<parametres.Length; i++){
             if(parametres[i].esPotAgumentar){
                 float tempsTranscorregut = GameManager.Instance.tempsTranscorregut + avançemFinsElSegon;
-                if(tempsTranscorregut >= parametres[i].segPerComençar){
+                //if(tempsTranscorregut >= parametres[i].segPerComençar){
                     parametres[i].valorActual = parametres[i].ObtenirAugment(tempsTranscorregut);
 
                     if(parametres[i].valorActual >= parametres[i].valorFinal){
                         parametres[i].esPotAgumentar = false;
                     }
-                }
+                //}
             }
         }
     }
