@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 	void Update()
     {
 		if(!comptadorEnrrereON){
-			timeText.text = "Temps: " + tempsTranscorregut.ToString("F2");
+			timeText.text = tempsTranscorregut.ToString("F2")+" s";
 			if(!GameEnded) tempsTranscorregut += Time.deltaTime;
 		}
 		else{

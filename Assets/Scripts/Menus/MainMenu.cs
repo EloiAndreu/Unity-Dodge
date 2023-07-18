@@ -18,10 +18,12 @@ public class MainMenu : MonoBehaviour
     }
 
     public void NextScene(){
+        SetTimeScale(1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
     }
 
     public void BeforeScene(){
+        SetTimeScale(1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -1);
     }
 
