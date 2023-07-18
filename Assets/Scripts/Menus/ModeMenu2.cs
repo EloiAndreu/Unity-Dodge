@@ -16,6 +16,8 @@ public class ModeMenu2 : MonoBehaviour
     private bool isSwiping = false;
     private float swipeThreshold = 50f;
 
+    public float duration = 1f;
+
     void Start(){
         imgWidth = Screen.width;
         float posInicial = -(imgIndex*imgWidth);
@@ -84,7 +86,8 @@ public class ModeMenu2 : MonoBehaviour
                 RectTransform rectTransform = transform.GetChild(i).GetComponent<RectTransform>();
                 if (rectTransform != null)
                 {
-                    rectTransform.anchoredPosition -= new Vector2(imgWidth, 0);
+                    Vector2 targetPosition = rectTransform.anchoredPosition - new Vector2(imgWidth, 0);
+                    StartCoroutine(MoureRectTransform(rectTransform, targetPosition));
                 }
                 else
                 {
@@ -101,7 +104,8 @@ public class ModeMenu2 : MonoBehaviour
                 RectTransform rectTransform = transform.GetChild(i).GetComponent<RectTransform>();
                 if (rectTransform != null)
                 {
-                    rectTransform.anchoredPosition += new Vector2(imgWidth, 0);
+                    Vector2 targetPosition = rectTransform.anchoredPosition + new Vector2(imgWidth, 0);
+                    StartCoroutine(MoureRectTransform(rectTransform, targetPosition));
                 }
                 else
                 {
@@ -109,5 +113,23 @@ public class ModeMenu2 : MonoBehaviour
                 }
             }
         }
+    }
+
+    IEnumerator MoureRectTransform(RectTransform rectTransform, Vector2 targetPosition)
+    {
+        float elapsedTime = 0f;
+        Vector2 startPosition = rectTransform.anchoredPosition;
+
+        while (elapsedTime < duration)
+        {
+            float t = elapsedTime / duration;
+            rectTransform.anchoredPosition = Vector2.Lerp(startPosition, targetPosition, t);
+
+            yield return null;
+
+            elapsedTime += Time.deltaTime;
+        }
+
+        rectTransform.anchoredPosition = targetPosition;
     }
 }

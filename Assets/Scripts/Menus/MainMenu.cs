@@ -42,6 +42,10 @@ public class MainMenu : MonoBehaviour
         SetTimeScale(0);
     }
 
+    public void ClickMode(){
+        ModeMenu2 scipt = GameObject.FindObjectOfType<ModeMenu2>();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + scipt.imgIndex+1);
+    }
 
     
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.28502616, g: 0.37139267, b: 0.49601075, a: 1}
+  m_IndirectSpecularColor: {r: 0.2850263, g: 0.37139297, b: 0.49601135, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1106,8 +1106,8 @@ MonoBehaviour:
   anuncisRestants: {fileID: 163284958}
   tt: {fileID: 578494705}
   disparadors: []
-  xDisparadors: 2
-  yDisparadors: 1
+  xDisparadors: 5
+  yDisparadors: 5
   dispManager: {fileID: 638122058}
   tempsTranscorregut: 0
   GameEnded: 0
@@ -5127,7 +5127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018253648387692807, guid: 29da8f9830a598a49a52dcc5dbb31ea2, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5018253648387692807, guid: 29da8f9830a598a49a52dcc5dbb31ea2, type: 3}
       propertyPath: minSwipeDistance
@@ -5135,7 +5135,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018253648387692856, guid: 29da8f9830a598a49a52dcc5dbb31ea2, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5018253648387692859, guid: 29da8f9830a598a49a52dcc5dbb31ea2, type: 3}
       propertyPath: m_RootOrder
