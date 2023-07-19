@@ -44,7 +44,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void Pause(){
-        animFons.SetBool("Clar", false);
+        //animFons.SetBool("Clar", true);
         classicMode.AturarTOT();
     }
 

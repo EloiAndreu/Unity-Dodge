@@ -87,8 +87,8 @@ public class GameManager : MonoBehaviour
 				GameEnded = false;
 				EnableDisableUI(true);
 				optionsMenu.SetActive(false);
-				Instantiate(playerPrefab, newPlayerposition, newPlayerrotation);
-				animFons.SetBool("Clar", true);
+				if(GameObject.FindGameObjectWithTag("Player")==null) Instantiate(playerPrefab, newPlayerposition, newPlayerrotation);
+				//animFons.SetBool("Clar", true);
 				classicMode.IniciarClassicMode();
 			}
 		}
@@ -127,14 +127,14 @@ public class GameManager : MonoBehaviour
 
 		anuncisRestants.text = "Anuncis restants: " + anuncisRest.ToString();
         //tt.FadeInText(finalText);
-		animFons.SetBool("Clar", false);
+		//animFons.SetBool("Clar", false);
 		optionsMenu.SetActive(true);
 		rewardedAds.LoadAd();
 	}
 
 	public void EnableDisableUI(bool enabled){
 		//map.SetActive(enabled);
-		if(!enabled) animFons.SetBool("Clar", true); 
+		animFons.SetBool("Clar", enabled); 
 		pauseButon.SetActive(enabled);
 		timeText.gameObject.SetActive(enabled);
 	}
