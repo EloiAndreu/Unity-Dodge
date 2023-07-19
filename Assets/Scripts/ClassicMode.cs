@@ -17,12 +17,11 @@ public class ClassicMode : MonoBehaviour
 
     void Start(){
         disparadors = GameManager.Instance.disparadors;
-        StartClassicMode();
-        StartCoroutine(SpawnBoxes());
+        IniciarClassicMode();
     }
 
     public void StartClassicMode(){
-        GameManager.Instance.tempsTranscorregut = 0f;
+        //GameManager.Instance.tempsTranscorregut = 0f;
         StartCoroutine(StartDelay());
     }
 
@@ -62,30 +61,6 @@ public class ClassicMode : MonoBehaviour
             isBox = true;
             apareixCaixa = false;
         }
-        //int apareixCaixaValue = Random.Range(0, tirsPerApareixerCaixa);
-        //if(apareixCaixaValue==0) isBox = true;
-
-
-        /*
-
-        //Multiple Tirs
-        int randomObjectesAlhora = Random.Range(0, parametres[2]);
-        List<int> posAlhora = new List<int>();
-
-        for(int i=0; i<randomObjectesAlhora; i++){
-            int randomValor = Random.Range(0, disparadors.Length);
-            while(posAlhora.Contains(randomValor)){
-                randomValor = Random.Range(0, disparadors.Length);
-            }
-            posAlhora.Add(randomValor);          
-        }
-
-        for(int i=posAlhora.Count-1; i>=0; i--){ 
-            disparadors[posAlhora[i]].GetComponent<Disparador>().Shoot(x.velocitatObstacles, false);
-            posAlhora.Remove(posAlhora[i]);
-        }
-
-        */
 
         float radi = parametres[3].valorFinal-parametres[3].valorActual;
         Transform player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -122,23 +97,6 @@ public class ClassicMode : MonoBehaviour
             }
         }
         
-
-        //int randomDisp = Random.Range(0, dispDetectats.Count);
-        //dispDetectats[randomDisp].GetComponent<Disparador>().Shoot(1, isBox);
-
-        /*
-        float randomValue = Random.value;
-        if(randomValue <= parametres[0].valorActual/100f){
-            for(int i=0; i<disparadors.Length; i++){
-                disparadors[i].GetComponent<Disparador>().ShootDetectingPlayer(1, isBox);
-            }
-        }
-        else{
-            int randomDisparador = Random.Range(0, disparadors.Length);
-            disparadors[randomDisparador].GetComponent<Disparador>().Shoot(1, isBox);
-        }
-
-        */
         yield return new WaitForSeconds(parametres[1].valorFinal-parametres[1].valorActual);
         if(!GameManager.Instance.GameEnded)StartCoroutine(Disparar());
     }
@@ -160,6 +118,15 @@ public class ClassicMode : MonoBehaviour
         }
 
         return objectesDetectats;
+    }
+
+    public void AturarTOT(){
+        StopAllCoroutines();
+    }
+
+    public void IniciarClassicMode(){
+        StartClassicMode();
+        StartCoroutine(SpawnBoxes());
     }
 
     [System.Serializable]

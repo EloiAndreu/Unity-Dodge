@@ -7,6 +7,8 @@ public class MainMenu : MonoBehaviour
 {
     public int panelToStart;
     public bool isMainMenu = false;
+    public Animator animFons;
+    public ClassicMode classicMode;
 
     void Awake(){
         if(isMainMenu){
@@ -33,6 +35,7 @@ public class MainMenu : MonoBehaviour
     }
 
     public void Restart(){
+        SetTimeScale(1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -41,7 +44,8 @@ public class MainMenu : MonoBehaviour
     }
 
     public void Pause(){
-        SetTimeScale(0);
+        animFons.SetBool("Clar", false);
+        classicMode.AturarTOT();
     }
 
     public void ClickMode(){

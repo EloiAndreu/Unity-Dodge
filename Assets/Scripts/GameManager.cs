@@ -7,6 +7,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
 	public TMP_Text finalText, timeText, anuncisRestants;
 	public TextTransitions tt;
 
@@ -40,6 +41,9 @@ public class GameManager : MonoBehaviour
 
 	GameData data;
 	public TMP_Text maxScore;
+
+	public Animator animFons;
+	public ClassicMode classicMode;
 	
 	void Awake()
 	{
@@ -50,7 +54,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	void Start(){
-		Time.timeScale = 1f;
+		//Time.timeScale = 1f;
         disparadors = GameObject.FindGameObjectsWithTag("Disparador");
 		optionsMenu.SetActive(false);
 	}
@@ -84,14 +88,17 @@ public class GameManager : MonoBehaviour
 				EnableDisableUI(true);
 				optionsMenu.SetActive(false);
 				Instantiate(playerPrefab, newPlayerposition, newPlayerrotation);
-				Time.timeScale = 1f;
+				animFons.SetBool("Clar", true);
+				classicMode.IniciarClassicMode();
 			}
 		}
     }
 
 	public void GameFinished(){
 		FindObjectOfType<AudioManager>().Play("Explosion");
-		Time.timeScale = 0f;
+		//Time.timeScale = 0f;
+		classicMode.AturarTOT();
+
 
 		if(anuncisRest<=0) {
 			recompensaButon.SetActive(false);
@@ -120,12 +127,14 @@ public class GameManager : MonoBehaviour
 
 		anuncisRestants.text = "Anuncis restants: " + anuncisRest.ToString();
         //tt.FadeInText(finalText);
+		animFons.SetBool("Clar", false);
 		optionsMenu.SetActive(true);
 		rewardedAds.LoadAd();
 	}
 
 	public void EnableDisableUI(bool enabled){
 		//map.SetActive(enabled);
+		if(!enabled) animFons.SetBool("Clar", true); 
 		pauseButon.SetActive(enabled);
 		timeText.gameObject.SetActive(enabled);
 	}
@@ -143,5 +152,9 @@ public class GameManager : MonoBehaviour
 
 	public void LoadGame(){
 		data = SaveSystem.LoadGame();
+	}
+
+	public void ActivarCompatdorEnrrere(){
+		comptadorEnrrereON = true;
 	}
 }
