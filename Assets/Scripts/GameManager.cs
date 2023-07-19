@@ -86,8 +86,14 @@ public class GameManager : MonoBehaviour
 				comptadorEnrrereON = false;
 				GameEnded = false;
 				EnableDisableUI(true);
+				
 				optionsMenu.SetActive(false);
-				if(GameObject.FindGameObjectWithTag("Player")==null) Instantiate(playerPrefab, newPlayerposition, newPlayerrotation);
+				GameObject jug = GameObject.FindGameObjectWithTag("Player");
+				if(jug != null) {
+					jug.GetComponent<PlayerMov>().enabled = true;
+					jug.GetComponent<AndPlayerMov>().enabled = true;
+				}
+				
 				//animFons.SetBool("Clar", true);
 				classicMode.IniciarClassicMode();
 			}
@@ -104,6 +110,7 @@ public class GameManager : MonoBehaviour
 			recompensaButon.SetActive(false);
 		}
 		EnableDisableUI(false);
+		EnableFons(false);
 
 		Color color = panelFinal.color;
         color.a = 0.8f;
@@ -134,15 +141,31 @@ public class GameManager : MonoBehaviour
 
 	public void EnableDisableUI(bool enabled){
 		//map.SetActive(enabled);
-		animFons.SetBool("Clar", enabled); 
+		//animFons.SetBool("Clar", enabled); 
 		pauseButon.SetActive(enabled);
 		timeText.gameObject.SetActive(enabled);
 	}
 
+	public void EnableFons(bool enabled){
+		animFons.SetBool("Clar", enabled); 
+	}
+
+
 	public void Reward(){
-		comptadorEnrere = 3f;
-		buttonsObj.SetActive(false);
-		comptadorEnrrereON = true;
+		if(player==null) {
+			Debug.Log("nou player");
+
+			player = Instantiate(playerPrefab, newPlayerposition, newPlayerrotation);
+			player.GetComponent<PlayerMov>().enabled = false;
+			player.GetComponent<AndPlayerMov>().enabled = false;
+		}
+		else{
+			player.SetActive(true);
+			player.GetComponent<PlayerMov>().enabled = false;
+			player.GetComponent<AndPlayerMov>().enabled = false;
+		}
+
+		ActivarCompatdorEnrrere();
 		if(anuncisRest>0) anuncisRest--;
 	}
 
@@ -155,6 +178,9 @@ public class GameManager : MonoBehaviour
 	}
 
 	public void ActivarCompatdorEnrrere(){
+		EnableFons(true);
+		comptadorEnrere = 3f;
+		buttonsObj.SetActive(false);
 		comptadorEnrrereON = true;
 	}
 }

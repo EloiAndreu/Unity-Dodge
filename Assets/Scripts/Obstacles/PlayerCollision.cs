@@ -14,7 +14,8 @@ public class PlayerCollision : MonoBehaviour
 
             GameManager.Instance.newPlayerposition = other.gameObject.transform.position;
             GameManager.Instance.newPlayerrotation = other.gameObject.transform.rotation;
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
+            other.gameObject.SetActive(false);
             GameManager.Instance.GameFinished();
         }
         else if(other.tag == "Box"){
