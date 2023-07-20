@@ -65,6 +65,7 @@ public class Disparador : MonoBehaviour
 
         disparant = true;
         myCoroutine = StartCoroutine(Disparar(velocitat, isBox));
+        
     }
 
     IEnumerator Disparar(int velocitat, bool isBox){
@@ -77,16 +78,18 @@ public class Disparador : MonoBehaviour
                 
             }
 
-            FindObjectOfType<AudioManager>().Play("Shoot");
-            
-            GameObject obstacle;
-            if(isBox) obstacle = Instantiate(boxPrefab, transform.position, Quaternion.identity, obstaclesParent.transform);
-            else obstacle = Instantiate(obstaclePrefab, transform.position, Quaternion.identity, obstaclesParent.transform);
-            obstacle.GetComponent<ObstacleMov>().StartMoving(transform.forward, velocitat);
-            //obstacle.GetComponent<Rigidbody>().AddForce(transform.forward * velocitat * 1000);
-            if(!isBox) CanviarColor(materials[0]);
-            else CanviarColor(boxMats[2]);
-            disparant = false;
+            if(!GameManager.Instance.GameEnded){
+                FindObjectOfType<AudioManager>().Play("Shoot");
+                
+                GameObject obstacle;
+                if(isBox) obstacle = Instantiate(boxPrefab, transform.position, Quaternion.identity, obstaclesParent.transform);
+                else obstacle = Instantiate(obstaclePrefab, transform.position, Quaternion.identity, obstaclesParent.transform);
+                obstacle.GetComponent<ObstacleMov>().StartMoving(transform.forward, velocitat);
+                //obstacle.GetComponent<Rigidbody>().AddForce(transform.forward * velocitat * 1000);
+                if(!isBox) CanviarColor(materials[0]);
+                else CanviarColor(boxMats[2]);
+                disparant = false;
+            }
         }
         myCoroutine = null;
     }

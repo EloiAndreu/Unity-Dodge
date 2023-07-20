@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     public bool GameEnded = false;
 
-	public GameObject optionsMenu;
+	public GameObject deathPanel;
 	public GameObject map;
 	public GameObject pauseButon;
 	public GameObject recompensaButon;
@@ -37,13 +37,12 @@ public class GameManager : MonoBehaviour
 	float comptadorEnrere = 3f;
 	public TMP_Text tempsErrereText;
 	public GameObject buttonsObj;
-	public Image panelFinal;
 
 	GameData data;
 	public TMP_Text maxScore;
 
 	public Animator animFons;
-	public ClassicMode classicMode;
+	ClassicMode classicMode;
 	
 	void Awake()
 	{
@@ -51,12 +50,13 @@ public class GameManager : MonoBehaviour
 		LoadGame();
 		dispManager.InstantiateDisparadors(xDisparadors, yDisparadors);
 		player = GameObject.FindGameObjectWithTag("Player");
+		classicMode = GetComponent<ClassicMode>();
 	}
 
 	void Start(){
 		//Time.timeScale = 1f;
         disparadors = GameObject.FindGameObjectsWithTag("Disparador");
-		optionsMenu.SetActive(false);
+		deathPanel.SetActive(false);
 	}
 
 	void Update()
@@ -68,10 +68,6 @@ public class GameManager : MonoBehaviour
 		else{
 			if(comptadorEnrere > 0f){
 				comptadorEnrere -= Time.unscaledDeltaTime;
-				
-				Color color = panelFinal.color;
-				color.a = 0f;
-				panelFinal.color = color;
 
 				tempsErrereText.color = colorTextBlanc;
 				tempsErrereText.text = "Apunt?";
@@ -87,7 +83,7 @@ public class GameManager : MonoBehaviour
 				GameEnded = false;
 				EnableDisableUI(true);
 				
-				optionsMenu.SetActive(false);
+				deathPanel.SetActive(false);
 				GameObject jug = GameObject.FindGameObjectWithTag("Player");
 				if(jug != null) {
 					jug.GetComponent<PlayerMov>().enabled = true;
@@ -105,38 +101,10 @@ public class GameManager : MonoBehaviour
 		//Time.timeScale = 0f;
 		classicMode.AturarTOT();
 
-
-		if(anuncisRest<=0) {
-			recompensaButon.SetActive(false);
-		}
 		EnableDisableUI(false);
 		EnableFons(false);
 
-		Color color = panelFinal.color;
-        color.a = 0.8f;
-        panelFinal.color = color;
-
-		buttonsObj.SetActive(true);
-		//StopAllCoroutines();
-		GameEnded = true;
-
-		float score = tempsTranscorregut;
-		if(data.maxScore < score){
-			SaveGame(true, score);
-			maxScore.text = "Max: " + score.ToString("F2");
-		}
-		else maxScore.text = "Max: " + data.maxScore.ToString("F2");
-
-		tempsErrereText.color = colorTextVermell;
-		tempsErrereText.text = "Has Perdut :<";
-		finalText.color = colorTextVermell;
-		finalText.text = score.ToString("F2");
-
-		anuncisRestants.text = "Anuncis restants: " + anuncisRest.ToString();
-        //tt.FadeInText(finalText);
-		//animFons.SetBool("Clar", false);
-		optionsMenu.SetActive(true);
-		rewardedAds.LoadAd();
+		StartCoroutine(EsperaSegons(1.5f));
 	}
 
 	public void EnableDisableUI(bool enabled){
@@ -182,5 +150,36 @@ public class GameManager : MonoBehaviour
 		comptadorEnrere = 3f;
 		buttonsObj.SetActive(false);
 		comptadorEnrrereON = true;
+	}
+
+	IEnumerator EsperaSegons(float sec){
+		Debug.Log("S'ha esperat");
+		yield return new WaitForSeconds(sec);
+
+		if(anuncisRest<=0) {
+			recompensaButon.SetActive(false);
+		}
+
+		buttonsObj.SetActive(true);
+		//StopAllCoroutines();
+		GameEnded = true;
+
+		float score = tempsTranscorregut;
+		if(data.maxScore < score){
+			SaveGame(true, score);
+			maxScore.text = "Max: " + score.ToString("F2");
+		}
+		else maxScore.text = "Max: " + data.maxScore.ToString("F2");
+
+		tempsErrereText.color = colorTextVermell;
+		tempsErrereText.text = "Has Perdut";
+		finalText.color = colorTextVermell;
+		finalText.text = score.ToString("F2");
+
+		anuncisRestants.text = "Anuncis restants: " + anuncisRest.ToString();
+        //tt.FadeInText(finalText);
+		//animFons.SetBool("Clar", false);
+		deathPanel.SetActive(true);
+		rewardedAds.LoadAd();
 	}
 }
