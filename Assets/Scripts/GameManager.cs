@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
 
 
 	public void Reward(){
+		if(anuncisRest>0) anuncisRest--;
 		if(player==null) {
 			Debug.Log("nou player");
 
@@ -134,7 +135,6 @@ public class GameManager : MonoBehaviour
 		}
 
 		ActivarCompatdorEnrrere();
-		if(anuncisRest>0) anuncisRest--;
 	}
 
 	public void SaveGame(bool tut, float time){

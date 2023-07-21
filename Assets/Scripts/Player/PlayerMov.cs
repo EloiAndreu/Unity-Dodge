@@ -9,13 +9,19 @@ public class PlayerMov : MonoBehaviour
     bool esMou = false;
 
     public bool distancePoint = true;
+    public bool nomesDos = false;
 
     void Start(){
         Vector3 cantonada = new Vector3(5f, 1f, -3.5f);
-        int x = GameManager.Instance.xDisparadors;
-        int y = GameManager.Instance.yDisparadors;
-        Vector3 initialPos = cantonada + new Vector3(0f, y/2f, x/2f);
-        transform.position = initialPos;
+        if(!nomesDos){
+            int x = GameManager.Instance.xDisparadors;
+            int y = GameManager.Instance.yDisparadors;
+            Vector3 initialPos = cantonada + new Vector3(0f, y/2f, x/2f);
+            transform.position = initialPos;
+        }
+        else{
+            transform.position = cantonada;
+        }
     }
 
     void Update(){
