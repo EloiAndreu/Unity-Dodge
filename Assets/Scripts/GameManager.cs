@@ -42,7 +42,9 @@ public class GameManager : MonoBehaviour
 	public TMP_Text maxScore;
 
 	public Animator animFons;
-	ClassicMode classicMode;
+
+	public string mode;
+	Mode[] actualMode;
 	
 	void Awake()
 	{
@@ -50,7 +52,8 @@ public class GameManager : MonoBehaviour
 		LoadGame();
 		dispManager.InstantiateDisparadors(xDisparadors, yDisparadors);
 		player = GameObject.FindGameObjectWithTag("Player");
-		classicMode = GetComponent<ClassicMode>();
+		actualMode = FindObjectsOfType<Mode>();
+		//nomesDos = GetComponent<NomesDos>();
 	}
 
 	void Start(){
@@ -90,8 +93,16 @@ public class GameManager : MonoBehaviour
 					jug.GetComponent<AndPlayerMov>().enabled = true;
 				}
 				
+				actualMode[0].IniciarMode();
 				//animFons.SetBool("Clar", true);
-				classicMode.IniciarClassicMode();
+				/*
+				if(mode == "Classic Mode"){
+					classicMode.IniciarClassicMode();
+				}
+				else if(mode == "Nomes Dos"){
+					nomesDos.IniciarClassicMode();
+				}
+				*/
 			}
 		}
     }
@@ -99,7 +110,16 @@ public class GameManager : MonoBehaviour
 	public void GameFinished(){
 		FindObjectOfType<AudioManager>().Play("Explosion");
 		//Time.timeScale = 0f;
-		classicMode.AturarTOT();
+		/*
+		if(mode == "Classic Mode"){
+			classicMode.AturarTOT();
+		}
+		else if(mode == "Nomes Dos"){
+			nomesDos.AturarTOT();
+		}
+		//classicMode.AturarTOT();
+		*/
+		actualMode[0].AturarTOT();
 
 		EnableDisableUI(false);
 		EnableFons(false);

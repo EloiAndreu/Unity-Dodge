@@ -5,8 +5,6 @@ using UnityEngine;
 public class NomesDos : MonoBehaviour
 {
     public ParametreAugmentarTemps[] parametres;
-    public float tempsPerApareixerCaixa1 = 10f;
-    public float tempsPerApareixerCaixa2 = 20f;
     public float startDelay = 3f;
     public float avançemFinsElSegon;
 

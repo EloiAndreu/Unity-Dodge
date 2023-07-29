@@ -59,9 +59,12 @@ public class Disparador : MonoBehaviour
     }
 
     IEnumerator WaitForCoroutineThenShoot(int velocitat, bool isBox){
+        /*
         if (myCoroutine != null){
             yield return new WaitUntil(() => myCoroutine == null);
         }
+        */
+        yield return null;
 
         disparant = true;
         myCoroutine = StartCoroutine(Disparar(velocitat, isBox));

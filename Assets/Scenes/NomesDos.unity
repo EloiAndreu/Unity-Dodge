@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 2138677392}
-  m_IndirectSpecularColor: {r: 0.2850263, g: 0.37139297, b: 0.49601135, a: 1}
+  m_IndirectSpecularColor: {r: 0.28502616, g: 0.37139267, b: 0.49601075, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1039,6 +1039,7 @@ GameObject:
   - component: {fileID: 578494708}
   - component: {fileID: 578494710}
   - component: {fileID: 578494711}
+  - component: {fileID: 578494712}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1112,6 +1113,7 @@ MonoBehaviour:
   buttonsObj: {fileID: 1722698929}
   maxScore: {fileID: 1248886004}
   animFons: {fileID: 1115683448}
+  mode: Nomes Dos
 --- !u!114 &578494707
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1199,7 +1201,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578494701}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bef57dcb2f170d24e98bb14ebe37cbe0, type: 3}
   m_Name: 
@@ -1237,11 +1239,57 @@ MonoBehaviour:
     "segPerComen\xE7ar": 40
     esPotAgumentar: 1
     valorActual: 4
-  tempsPerApareixerCaixa1: 10
-  tempsPerApareixerCaixa2: 20
   startDelay: 3
   "avan\xE7emFinsElSegon": 0
   dispDetectats: []
+--- !u!114 &578494712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578494701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8dd753556d470374ab7740da6540456c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parametres:
+  - name: punteria
+    valorInicial: 0
+    valorFinal: 100
+    tempsTotal: 150
+    "tempsAvan\xE7at": 0
+    "segPerComen\xE7ar": 0
+    esPotAgumentar: 1
+    valorActual: 0
+  - name: TempsEntreTirs
+    valorInicial: 0.1
+    valorFinal: 1
+    tempsTotal: 300
+    "tempsAvan\xE7at": 0
+    "segPerComen\xE7ar": 20
+    esPotAgumentar: 1
+    valorActual: 0.1
+  - name: multipleTirs
+    valorInicial: 1
+    valorFinal: 5
+    tempsTotal: 150
+    "tempsAvan\xE7at": 0
+    "segPerComen\xE7ar": 30
+    esPotAgumentar: 1
+    valorActual: 1
+  - name: radiPunteria
+    valorInicial: 2.1
+    valorFinal: 4
+    tempsTotal: 150
+    "tempsAvan\xE7at": 0
+    "segPerComen\xE7ar": 40
+    esPotAgumentar: 1
+    valorActual: 4
+  startDelay: 3
+  "avan\xE7emFinsElSegon": 0
+  disparadors: []
 --- !u!1 &633291137
 GameObject:
   m_ObjectHideFlags: 0
@@ -4102,8 +4150,8 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 578494710}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: BeforeScene
-        m_Mode: 1
+        m_MethodName: MoveToScene
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4521,8 +4569,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 578494710}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
-        m_MethodName: BeforeScene
-        m_Mode: 1
+        m_MethodName: MoveToScene
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
